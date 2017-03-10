@@ -6,6 +6,7 @@
   "description": "A simple helpful robot for your Company",
   "dependencies": {
     "hubot": "^2.19.0",
+    "hubot-bikeshed": "^1.1.0",
     "hubot-business-cat": "^1.5.6",
     "hubot-darksky": "^1.1.0",
     "hubot-darts": "^1.0.4",
