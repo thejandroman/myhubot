@@ -1,5 +1,7 @@
 [
   "hubot-business-cat",
+  "hubot-darksky",
+  "hubot-darts",
   "hubot-diagnostics",
   "hubot-help",
   "hubot-heroku-keepalive",
