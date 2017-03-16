@@ -77,7 +77,8 @@ module.exports = function(robot) {
         return;
       }
 
-      response = 'Looks like ' + name + ' has the following ' + numEvents + ' events:';
+      response = ':spiral_calendar_pad: Looks like ' + name
+        + ' has the following ' + numEvents + ' events:';
 
       eventKeys.forEach(function(key) {
         var event = data[key],
