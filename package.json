@@ -22,7 +22,8 @@
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^4.3.3",
     "hubot-thank-you": "0.0.3",
-    "hubot-victory": "^1.5.3"
+    "hubot-victory": "^1.5.3",
+    "ical": "^0.5.0"
   },
   "engines": {
     "node": "0.10.x"
