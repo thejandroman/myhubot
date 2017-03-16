@@ -15,12 +15,12 @@
 
 var ical = require('ical');
 
-module.exports = (robot) => {
-  robot.respond(/busca set (.*)/i, (res) => {
+module.exports = function(robot) {
+  robot.respond(/busca set (.*)/i, function(res) {
     var icalUrl = res.match[1].trim(),
         reqUser = res.message.user.name;
 
-    ical.fromURL(icalUrl, {}, (err, data) => {
+    ical.fromURL(icalUrl, {}, function(err, data) {
       if (err) {
         res.reply(':dizzy_face: I don\'t understand that iCal URL.');
         return;
@@ -32,7 +32,7 @@ module.exports = (robot) => {
     });
   });
 
-  robot.respond(/busca show/i, (res) => {
+  robot.respond(/busca show/i, function(res) {
     var name     = res.message.user.name,
         icalUrl = robot.brain.get('busca:' + name);
 
@@ -43,7 +43,7 @@ module.exports = (robot) => {
     }
   });
 
-  robot.respond(/busca remove/i, (res) => {
+  robot.respond(/busca remove/i, function(res) {
     var name = res.message.user.name;
 
     robot.brain.remove('busca:' + name);
@@ -51,7 +51,7 @@ module.exports = (robot) => {
     res.reply(':wastebasket: I\'ve removed your :calendar:.');
   });
 
-  robot.respond(/busca @(.*)/i, (res) => {
+  robot.respond(/busca @(.*)/i, function(res) {
     var name     = res.match[1].trim(),
         icalUrl = robot.brain.get('busca:' + name),
         response;
@@ -61,7 +61,7 @@ module.exports = (robot) => {
       return;
     }
 
-    ical.fromURL(icalUrl, {}, (err, data) => {
+    ical.fromURL(icalUrl, {}, function(err, data) {
       if (err) {
         res.reply(':dizzy_face: I don\'t understand that iCal URL.');
         return;
@@ -79,7 +79,7 @@ module.exports = (robot) => {
 
       response = 'Looks like ' + name + ' has the following ' + numEvents + ' events:';
 
-      eventKeys.forEach((key) => {
+      eventKeys.forEach(function(key) {
         var event = data[key],
             summary = event.summary,
             startDate = event.start.toDateString(),
