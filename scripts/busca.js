@@ -10,8 +10,8 @@
 // Commands:
 //   hubot busca set <ical url> - stores a user's ical URL
 //   hubot busca show - show's a user's ical URL
-//   hubot busca <username> - looks up that user's events and returns the next 5
-//   hubot busca delete - deletes the user's stored ical URL
+//   hubot busca <user> - returns that user's next 5 events; user must be an @mention
+//   hubot busca remove - deletes the user's stored ical URL
 
 var ical = require('ical');
 
