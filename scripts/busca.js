@@ -76,7 +76,7 @@ module.exports = function(robot) {
         res.reply(':thinking_face: I can\'t find any upcoming events for ' + name + '.');
         return;
       }
-      edates = [];
+      var edates = [];
       response = ':spiral_calendar_pad: Looks like ' + name
         + ' has the following ' + numEvents + ' events:';
       eventKeys.forEach(function(key) {
