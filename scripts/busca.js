@@ -80,13 +80,8 @@ module.exports = function(robot) {
       response = ':spiral_calendar_pad: Looks like ' + name
         + ' has the following ' + numEvents + ' events:';
       eventKeys.forEach(function(key) {
-        var event = data[key],
-            summary = event.summary,
-            startDate = event.start.toDateString(),
-            endDate = event.end.toDateString();
+        var event = data[key]
             edates.push(event);
-
-        //response += '\n- ' + summary + ' from ' + startDate + ' until ' + endDate;
       });
       edates.sort(function(a,b) {
               return a.start - b.start;
