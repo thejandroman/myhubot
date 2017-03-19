@@ -76,17 +76,24 @@ module.exports = function(robot) {
         res.reply(':thinking_face: I can\'t find any upcoming events for ' + name + '.');
         return;
       }
-
+      edates = [];
       response = ':spiral_calendar_pad: Looks like ' + name
         + ' has the following ' + numEvents + ' events:';
-
       eventKeys.forEach(function(key) {
         var event = data[key],
             summary = event.summary,
             startDate = event.start.toDateString(),
             endDate = event.end.toDateString();
-        response += '\n- ' + summary + ' from ' + startDate + ' - ' + endDate;
+            edates.push(event);
+
+        //response += '\n- ' + summary + ' from ' + startDate + ' until ' + endDate;
       });
+      edates.sort(function(a,b) {
+              return a.start - b.start;
+            });
+      edates.forEach(function(key){
+          response += '\n- ' + key.summary + ' from ' + key.start.toDateString() + ' until ' + key.end.toDateString();
+      })
 
       res.reply(response);
     });
