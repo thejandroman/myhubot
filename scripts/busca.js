@@ -80,7 +80,7 @@ module.exports = function(robot) {
       response = ':spiral_calendar_pad: Looks like ' + name
         + ' has the following ' + numEvents + ' events:';
       eventKeys.forEach(function(key) {
-        var event = data[key]
+        var event = data[key];
             edates.push(event);
       });
       edates.sort(function(a,b) {
