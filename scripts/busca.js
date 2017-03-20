@@ -68,8 +68,8 @@ module.exports = function(robot) {
       }
 
       var numEvents = Object.keys(data).length,
-          eventKeys = Object.keys(data).slice(0, 5);
-
+          eventsToShow = 5;
+          eventKeys = Object.keys(data);
       res.send(numEvents);
 
       if (numEvents === 0) {
@@ -78,14 +78,18 @@ module.exports = function(robot) {
       }
       var edates = [];
       response = ':spiral_calendar_pad: Looks like ' + name
-        + ' has the following ' + numEvents + ' events:';
+        + ' has a total of ' + numEvents + ' events.';
       eventKeys.forEach(function(key) {
         var event = data[key];
             edates.push(event);
       });
+
+
       edates.sort(function(a,b) {
               return a.start - b.start;
             });
+      edates = edates.slice(0, eventsToShow);
+      response += '\n '+ 'I will show you the next '+ eventsToShow +':';
       edates.forEach(function(key){
           response += '\n- ' + key.summary + ' from ' + key.start.toDateString() + ' until ' + key.end.toDateString();
       })
