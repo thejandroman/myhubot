@@ -67,34 +67,40 @@ module.exports = function(robot) {
         return;
       }
 
-      var numEvents = Object.keys(data).length,
+      var events       = eventObject(data, eventsToShow),
+          numEvents    = Object.keys(events).length,
           eventsToShow = 5;
-          eventKeys = Object.keys(data);
-      res.send(numEvents);
 
       if (numEvents === 0) {
         res.reply(':thinking_face: I can\'t find any upcoming events for ' + name + '.');
         return;
       }
-      var edates = [];
+
       response = ':spiral_calendar_pad: Looks like ' + name
         + ' has a total of ' + numEvents + ' events.';
-      eventKeys.forEach(function(key) {
-        var event = data[key];
-            edates.push(event);
-      });
 
-
-      edates.sort(function(a,b) {
-              return a.start - b.start;
-            });
-      edates = edates.slice(0, eventsToShow);
-      response += '\n '+ 'I will show you the next '+ eventsToShow +':';
-      edates.forEach(function(key){
+      var upcomingEvents = events.slice(0, eventsToShow);
+      response += '\n ' + 'I will show you the next ' + eventsToShow + ':';
+      upcomingEvents.forEach(function(key) {
           response += '\n- ' + key.summary + ' from ' + key.start.toDateString() + ' until ' + key.end.toDateString();
-      })
+      });
 
       res.reply(response);
     });
   });
 };
+
+// Takes raw events object as returned by ical.fromURL and returns
+// sorted and filtered array.
+function eventObject(vevents) {
+  var events = Object.values(vevents),
+      today  = new Date();
+
+  return events
+    .filter(function(event) {
+      return event.end > today;
+    })
+    .sort(function(a, b) {
+      return a.start - b.start;
+    });
+}
